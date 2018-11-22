@@ -16,24 +16,25 @@ int main(void)
 
 
     // Draw the half pyramid
-
-    // For each row
     for(int i = 1; i <= height; i++)
     {
-        int h;
-        hashes = i + 1;
         // Print spaces
-        //printf(" ");
+        spaces = height - i;
+
+        for(int s = 1; s <= spaces; s++)
+        {
+            printf(" ");
+        }
+
         // Print hashes
-        while(h < hashes)
+        hashes = i + 1;
+
+        for(int h = 1; h <= hashes; h++)
         {
             printf("#");
-            h = h + 1;
         }
 
         // Print new line
         printf("\n");
     }
-
-
 }

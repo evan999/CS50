@@ -12,7 +12,7 @@ Otherwise, user is prompted to retry.
 Valid heights: [0, 23]
 Invalid heights: less than 0, more than 23
 
-Pseudocode:
+Pseudocode for user input:
 
 int n;
 
@@ -54,7 +54,7 @@ nth row: x #, y spaces
 
 Pattern:
 
-nth row: n + 1 #, (n - 1) - 1 spaces
+nth row: n + 1 #, height - 1 spaces
 
        ##
       ###
