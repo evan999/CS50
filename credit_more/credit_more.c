@@ -59,6 +59,22 @@ int main(void)
                noTimes += digit;
           }
 
+          if(length == 2)
+          {
+               if(ccnum == 34 || ccnum == 37)
+               {
+                    printf("AMEX\n");
+               }
+               else if (ccnum == 51 || ccnum == 52 || ccnum == 53 || ccnum == 54 || ccnum ==55)
+               {
+                    printf("MASTERCARD\n");
+               }
+               else
+               {
+                    printf("VISA\n");
+               }
+          }
+
      }
      int final = noTimes + timesTwo;
      if (final % 10 == 0)
@@ -71,5 +87,8 @@ int main(void)
      }
      //printf("timesTwo: %i\tnoTimes: %i\n", timesTwo, noTimes);
      printf("total: %i\n", final);
+
+
+
 }
 //378282246310005
