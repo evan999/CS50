@@ -5,22 +5,23 @@
 
 int main(void)
 {
-    string name = get_string("Enter your name: ");
+    string name = get_string();
 
-    for(int i = 0; i < strlen(name); i++)
+    for (int i = 0; i < strlen(name); i++)
     {
-        int first_initial = name[0];
 
-        if(islower(name[0]))
+        if (i == 0)
         {
-            firstI = toupper(name[0]);
+            printf("%c", toupper(name[i]));
+        }
+        else if ((int) name[i - 1] == 32)
+        {
+            printf("%c", toupper(name[i]));
         }
         else
         {
-
+            continue;
         }
-
-        // int last_initial =
-
     }
+    printf("\n");
 }
