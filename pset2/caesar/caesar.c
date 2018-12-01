@@ -17,9 +17,10 @@ int main(int argc, string argv[])
     string plaintext = get_string();
     // printf("%s\n", plaintext);
 
-    int ciphertext[strlen(plaintext)];
+    // int ciphertext[strlen(plaintext)];
 
-    for (int i = 0; n = strlen(plaintext); i < n; i++)
+
+    for (int i = 0, n = strlen(plaintext); i < n; i++)
     {
         char letter = plaintext[i];
 
@@ -27,11 +28,14 @@ int main(int argc, string argv[])
         {
             if(isupper(plaintext[i]))
             {
-                printf("%c\n", letter);
+                int number = (int) letter;
+                int cipher = number + key % 26;
+                printf("%i\n", cipher);
             }
             else if(islower(plaintext[i]))
             {
-                printf("%c\n", letter);
+                int number = (int) letter;
+                printf("%i\n", (cipher - 97) );
             }
             // printf("%c", plaintext[i]);
         }
