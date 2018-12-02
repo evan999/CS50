@@ -35,7 +35,7 @@ int main(int argc, string argv[])
             else if(islower(plaintext[i]))
             {
                 int number = (int) letter;
-                printf("%i\n", (cipher - 97) );
+                printf("%i\n",  cipher);
             }
             // printf("%c", plaintext[i]);
         }
