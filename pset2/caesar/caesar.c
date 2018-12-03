@@ -6,7 +6,7 @@
 
 int main(int argc, string argv[])
 {
-    if(argc != 2)
+    if (argc != 2)
     {
         printf("Usage: ./caesar k\n");
         return 1;
@@ -17,23 +17,21 @@ int main(int argc, string argv[])
     string plaintext = get_string("plaintext: ");
     //printf("%s\n", plaintext);
 
-    // int ciphertext[strlen(plaintext)];
-
     printf("ciphertext: ");
 
     for (int i = 0, n = strlen(plaintext); i < n; i++)
     {
         char letter = plaintext[i];
 
-        if(isalpha(plaintext[i]))
+        if (isalpha(plaintext[i]))
         {
-            if(isupper(plaintext[i]))
+            if (isupper(plaintext[i]))
             {
 
                 int number = (int) letter;
                 //printf("%i\n", number);
                 int cipher = (number + key % 26) - 65;
-                while(cipher > 25)
+                while (cipher > 25)
                 {
                     cipher = cipher - 26;
                 }
@@ -42,13 +40,13 @@ int main(int argc, string argv[])
                 char ascii_char = (char) ascii_cipher;
                 printf("%c", ascii_char);
             }
-            else if(islower(plaintext[i]))
+            else if (islower(plaintext[i]))
             {
                 //printf("%c", plaintext[i]);
                 int number = (int) letter;
                 //printf("%i\n", number);
                 int cipher = (number + key % 26) - 97;
-                while(cipher > 25)
+                while (cipher > 25)
                 {
                     cipher = cipher - 26;
                 }
@@ -60,7 +58,7 @@ int main(int argc, string argv[])
         }
         else
         {
-           printf("%c", plaintext[i]);
+            printf("%c", plaintext[i]);
         }
     }
     printf("\n");
