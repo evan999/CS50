@@ -19,6 +19,7 @@ int main(int argc, string argv[])
         if (!isalpha(key[k]))
         {
             printf("Usage: ./vigenere k\n");
+            return 1;
         }
     }
 
@@ -28,13 +29,13 @@ int main(int argc, string argv[])
 
     printf("ciphertext: ");
     //int CASE;
-    for (int plaintext_index = 0, key_index = 0, n = strlen(plaintext); plaintext_index < n; plaintext_index++, key_index++)
+    for (int plaintext_index = 0, key_index = 0, n = strlen(plaintext); plaintext_index < n; plaintext_index++)
     {
         int letterKey = tolower(key[key_index % key_len]) - 'a';
-        if (key_index >= key_len)
-        {
-            key_index = 0;
-        }
+        // if (key_index >= key_len)
+        // {
+        //     key_index = 0;
+        // }
         if (isupper(plaintext[plaintext_index]))
         {
             //printf("%c", 'A' + (p[i] - 'A' + letterKey) % 26);
