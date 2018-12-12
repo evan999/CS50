@@ -21,80 +21,58 @@ int duration(string fraction)
 // Calculates frequency (in Hz) of a note
 int frequency(string note)
 {
-    int n;
+   // int n;
 
-    int key = note[0] - '0';
+    int letter = note[0] - '0';
+    int octave = note[1] - '0';
 
-    int octave = strlen(note-1) - '0';
+   // int octave = strlen(note-1) - '0';
     int freq;
-    // TODO
-    switch(key){
-        case 'A':
-            n = 0.0;
-            printf("%i\n", n);
-            // freq = 440.00;
-            // printf("freq: %i\n", freq);
-            break;
-        case 'B':
-            n = 2.0;
-            printf("%i\n", n);
-            // freq = pow(2.0, (2.0/12.0)) * 440.00;
-            // printf("freq: %i\n", freq);
-            break;
-        case 'C':
-            n = -9.0;
-            // freq =  pow(2.0, (-9.0/12.0)) * 440.00;
-            // printf("freq: %i\n", freq);
-            break;
-        case 'D':
-            n = -7.0;
-            // freq = pow(2.0, (-7.0/12.0)) * 440.00;
-            //
-            break;
-        case 'E':
-            n = -5.0;
-            // freq = pow(2.0, (-5.0/12.0)) * 440.00;
-            // printf("freq: %i\n", freq);
-            break;
-        case 'F':
-            n = -4.0;
-            // freq = pow(2.0, (-4.0/12.0)) * 440.00;
-            // printf("freq: %i\n", freq);
-            break;
-        case 'G':
-            n = -2.0;
-            // freq = pow(2.0, (-2.0/12.0)) * 440.00;
-            // printf("freq: %i\n", freq);
-            break;
-    }
 
-    //int num_semitones = pow(2, (n/12) * 440.00);
-    if (note[1] == '#')
+    if (letter == 'A')
     {
-        n += 1;
+        freq = round(440 * pow(2, octave - 4));
+        printf("freq: %i\n", freq);
+        return freq;
     }
-    else if (note[1] == 'b')
+    else if (letter == 'B')
     {
-        n -= 1;
+        freq = round(494 * pow(2, octave - 4));
+        printf("freq: %i\n", freq);
+        return freq;
     }
-
-    if (octave >= 0 && octave <= 8)
+    else if (letter == 'C')
     {
-        n +=  (octave - 4.0) * 12;
+        freq = round(262 * pow(2, octave - 4));
+         printf("freq: %i\n", freq);
+        return freq;
+    }
+    else if (letter == 'D')
+    {
+        freq = round(294 * pow(2, octave - 4));
+         printf("freq: %i\n", freq);
+        return freq;
+    }
+    else if (letter == 'E')
+    {
+        freq = round(329 * pow(2, octave - 4));
+         printf("freq: %i\n", freq);
+        return freq;
+    }
+    else if (letter == 'F')
+    {
+        freq = round(349 * pow(2, octave - 4));
+         printf("freq: %i\n", freq);
+        return freq;
+    }
+    else if (letter == 'G')
+    {
+        freq = round(392 * pow(2, octave - 4));
+        printf("freq: %i\n", freq);
+        return freq;
     }
 
-    // else
-    // {
-
-    // }
-    // freq = 440 * pow(2, octave-4);
-    printf("%i\n", n);
-    freq = round(pow(2.0, (n/12.0)) * 440.00);
-    //int result = round(freq);
-    // printf("final freq: %i\n", freq);
-
-    return freq;
-    // Frequency = 2^(n\12) * 440
+    return 0;
 
 }
 
