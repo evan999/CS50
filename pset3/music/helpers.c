@@ -23,21 +23,22 @@ int frequency(string note)
 {
     int n;
 
-    int key = note[0] - '0';
-
-    int octave = strlen(note-1) - '0';
+    char key = note[0];
+    //int octave = note[1];
+   // int length = strlen(note)
+    int octave = note[strlen(note + 1)] - '0';
     int freq;
     // TODO
     switch(key){
         case 'A':
             n = 0.0;
-            printf("%i\n", n);
+            // printf("%i\n", n);
             // freq = 440.00;
             // printf("freq: %i\n", freq);
             break;
         case 'B':
             n = 2.0;
-            printf("%i\n", n);
+            // printf("%i\n", n);
             // freq = pow(2.0, (2.0/12.0)) * 440.00;
             // printf("freq: %i\n", freq);
             break;
@@ -80,7 +81,8 @@ int frequency(string note)
 
     if (octave >= 0 && octave <= 8)
     {
-        n +=  (octave - 4.0) * 12;
+        n +=  (octave - 4.0) * 12.0;
+        //n *= 12;
     }
 
     // else
@@ -88,7 +90,7 @@ int frequency(string note)
 
     // }
     // freq = 440 * pow(2, octave-4);
-    printf("%i\n", n);
+   // printf("%i\n", n);
     freq = round(pow(2.0, (n/12.0)) * 440.00);
     //int result = round(freq);
     // printf("final freq: %i\n", freq);
