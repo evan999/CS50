@@ -2,16 +2,18 @@
 
 #include <cs50.h>
 
+#include <stdio.h>
 #include "helpers.h"
 #include <stdbool.h>
 #include <math.h>
+#include <string.h>
 
 // Converts a fraction formatted as X/Y to eighths
 int duration(string fraction)
 {
     // TODO
-    int x = atoi(fraction[0]);
-    int y = atoi(fraction[2]);
+    int x = fraction[0] - '0';
+    int y = fraction[2] - '0';
     int eighths = (x/y) * 8;
     return eighths;
 }
@@ -19,141 +21,79 @@ int duration(string fraction)
 // Calculates frequency (in Hz) of a note
 int frequency(string note)
 {
-    int n = 0;
+    int n;
 
-    int key = atoi(note[1]);
-    if(note[2] == '#' || note[2] == 'b')
-    {
-        int accidental = atoi(note[2]);
-    }
-    else
-    {
-        int octave = atoi(note[2]);
-    }
-    float freq = 1.00;
+    int key = note[0] - '0';
 
+    int octave = strlen(note-1) - '0';
+    int freq;
     // TODO
     switch(key){
         case 'A':
-            n = 0;
-            if (octave > 4)
-            {
-                for(int i = 4; i < octave; i++)
-                {
-                    n += 12;
-                }
-            }
-            else if (octave < 4)
-            {
-                for(int i = 4; i > octave; i--)
-                {
-                    n -= 12;
-                }
-            }
+            n = 0.0;
+            printf("%i\n", n);
+            // freq = 440.00;
+            // printf("freq: %i\n", freq);
+            break;
         case 'B':
-            n = 2;
-            if (octave > 4)
-            {
-                for(int i = 4; i < octave; i++)
-                {
-                    n += 12;
-                }
-            }
-            else if (octave < 4)
-            {
-                for(int i = 4; i > octave; i--)
-                {
-                    n -= 12;
-                }
-            }
+            n = 2.0;
+            printf("%i\n", n);
+            // freq = pow(2.0, (2.0/12.0)) * 440.00;
+            // printf("freq: %i\n", freq);
+            break;
         case 'C':
-            n = -9;
-            if (octave > 4)
-            {
-                for(int i = 4; i < octave; i++)
-                {
-                    n += 12;
-                }
-            }
-            else if (octave < 4)
-            {
-                for(int i = 4; i > octave; i--)
-                {
-                    n -= 12;
-                }
-            }
+            n = -9.0;
+            // freq =  pow(2.0, (-9.0/12.0)) * 440.00;
+            // printf("freq: %i\n", freq);
+            break;
         case 'D':
-            n = -7;
-            if (octave > 4)
-            {
-                for(int i = 4; i < octave; i++)
-                {
-                    n += 12;
-                }
-            }
-            else if (octave < 4)
-            {
-                for(int i = 4; i > octave; i--)
-                {
-                    n -= 12;
-                }
-            }
+            n = -7.0;
+            // freq = pow(2.0, (-7.0/12.0)) * 440.00;
+            //
+            break;
         case 'E':
-            n = -5;
-            if (octave > 4)
-            {
-                for(int i = 4; i < octave; i++)
-                {
-                    n += 12;
-                }
-            }
-            else if (octave < 4)
-            {
-                for(int i = 4; i > octave; i--)
-                {
-                    n -= 12;
-                }
-            }
+            n = -5.0;
+            // freq = pow(2.0, (-5.0/12.0)) * 440.00;
+            // printf("freq: %i\n", freq);
+            break;
         case 'F':
-            n = -4;
-            if (octave > 4)
-            {
-                for(int i = 4; i < octave; i++)
-                {
-                    n += 12;
-                }
-            }
-            else if (octave < 4)
-            {
-                for(int i = 4; i > octave; i--)
-                {
-                    n -= 12;
-                }
-            }
+            n = -4.0;
+            // freq = pow(2.0, (-4.0/12.0)) * 440.00;
+            // printf("freq: %i\n", freq);
+            break;
         case 'G':
-            n = -2;
-            if (octave > 4)
-            {
-                for(int i = 4; i < octave; i++)
-                {
-                    n += 12;
-                }
-            }
-            else if (octave < 4)
-            {
-                for(int i = 4; i > octave; i--)
-                {
-                    n -= 12;
-                }
-            }
+            n = -2.0;
+            // freq = pow(2.0, (-2.0/12.0)) * 440.00;
+            // printf("freq: %i\n", freq);
+            break;
     }
 
     //int num_semitones = pow(2, (n/12) * 440.00);
+    if (note[1] == '#')
+    {
+        n += 1;
+    }
+    else if (note[1] == 'b')
+    {
+        n -= 1;
+    }
 
-    float freq = (pow(2, n/12.0) * 440.00);
-    int result = round(freq);
+    if (octave >= 0 && octave <= 8)
+    {
+        n +=  (octave - 4.0) * 12;
+    }
 
-    return result;
+    // else
+    // {
+
+    // }
+    // freq = 440 * pow(2, octave-4);
+    printf("%i\n", n);
+    freq = round(pow(2.0, (n/12.0)) * 440.00);
+    //int result = round(freq);
+    // printf("final freq: %i\n", freq);
+
+    return freq;
     // Frequency = 2^(n\12) * 440
 
 }
