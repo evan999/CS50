@@ -2,15 +2,19 @@
 
 ## What's `stdint.h`?
 
-TODO
+'stdint.h' is a C standard library that defines a set of typedefs that specify exact-width integer types,
+along with the defined maximum and minimum allowable values for each type, using macros.
 
 ## What's the point of using `uint8_t`, `uint32_t`, `int32_t`, and `uint16_t` in a program?
 
-TODO
+These are fixed-width integer data types.
 
 ## How many bytes is a `BYTE`, a `DWORD`, a `LONG`, and a `WORD`, respectively?
 
-TODO
+'BYTE' - 1 byte (8 bits)
+'DWORD'- 4 bytes
+'LONG' - 4 bytes
+'WORD' - 2 bytes
 
 ## What (in ASCII, decimal, or hexadecimal) must the first two bytes of any BMP file be? Leading bytes used to identify file formats (with high probability) are generally called "magic numbers."
 
