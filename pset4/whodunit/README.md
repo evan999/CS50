@@ -18,31 +18,35 @@ These are fixed-width integer data types.
 
 ## What (in ASCII, decimal, or hexadecimal) must the first two bytes of any BMP file be? Leading bytes used to identify file formats (with high probability) are generally called "magic numbers."
 
-TODO
+0x42 0x4D in hexadecimal
+BM in ASCII
+
 
 ## What's the difference between `bfSize` and `biSize`?
 
-TODO
+bfSize defines the size, in bytes, of the file.
+biSize defines the size, in bytes, required by the structure.
 
 ## What does it mean if `biHeight` is negative?
 
-TODO
+If biHeight is negative, it indicates a top-down DIB and its origin is the upper-left corner.
 
 ## What field in `BITMAPINFOHEADER` specifies the BMP's color depth (i.e., bits per pixel)?
 
-TODO
+biBitCount
 
 ## Why might `fopen` return `NULL` in lines 24 and 32 of `copy.c`?
 
-TODO
+Some possibilities are that the file to be opened cannot be found as
+it hasn't been created yet, or no file is specified in the command line.
 
 ## Why is the third argument to `fread` always `1` in our code?
 
-TODO
+It reads the hash.
 
 ## What value does line 65 of `copy.c` assign to `padding` if `bi.biWidth` is `3`?
 
-TODO
+
 
 ## What does `fseek` do?
 
@@ -54,4 +58,4 @@ TODO
 
 ## Whodunit?
 
-TODO
+It was Professor Plum with the candlestick in the library.
