@@ -10,11 +10,11 @@ int main(int argc, char *argv[])
     // ensure proper usage
     int n = (int) argv[1];
 
-    if (n > 100 || n < 1)
-    {
-        fprintf(stderr, "Usage: integer must be between 1 and 100\n");
-        return 1;
-    }
+    // if (n > 100 || n < 1)
+    // {
+    //     fprintf(stderr, "Usage: integer must be between 1 and 100\n");
+    //     return 1;
+    // }
 
     if (argc != 4)
     {
@@ -50,8 +50,6 @@ int main(int argc, char *argv[])
     BITMAPFILEHEADER bf;
     fread(&bf, sizeof(BITMAPFILEHEADER), 1, inptr);
 
-    bf.bfSize = bi.biSizeImage + sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
-
 
     // read infile's BITMAPINFOHEADER
     BITMAPINFOHEADER bi;
@@ -65,7 +63,7 @@ int main(int argc, char *argv[])
   //  bi.biWidth *= n;
   //  bi.biHeight *= n;
 
-    bi.biSizeImage = ((sizeof(RGBTRIPLE) * bi.biWidth) + padding) * abs(bi.biHeight);
+
 
 
 
@@ -91,9 +89,13 @@ int main(int argc, char *argv[])
     // write outfile's BITMAPINFOHEADER
     fwrite(&bi, sizeof(BITMAPINFOHEADER), 1, outptr);
 
-    bi.biWidth *= n;
+    //bi.biWidth *= n;
     // bf.bfSize = biSize + 54;
-    bi.biHeight *= n;
+    //bi.biHeight *= n;
+
+    //bi.biSizeImage = ((sizeof(RGBTRIPLE) * bi.biWidth) + padding) * abs(bi.biHeight);
+
+    //bf.bfSize = bi.biSizeImage + sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
 
     // determine padding for scanlines
     int padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
@@ -105,16 +107,25 @@ int main(int argc, char *argv[])
         // iterate over pixels in scanline
         for (int j = 0; j < bi.biWidth; j++)
         {
+
             // temporary storage
             RGBTRIPLE triple;
 
+            //RGBTRIPLE pixels[sizeof(bi.biSizeImage)] = { }; // needs editing
             // read RGB triple from infile
             fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
 
 
-            // write RGB triple to outfile
+            // write each pixel into the output file's scanline
+            // write RGB triple to outfile n times
 
+
+            printf("%c", &triple);
             fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
+
+                // pixels[p] = &triple; // needs editing
+            }
+
         }
 
         // skip over padding, if any
