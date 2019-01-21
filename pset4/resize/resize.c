@@ -153,6 +153,7 @@ int main(int argc, char *argv[])
             {
                 fputc(0x00, outptr);
             }
+
             if (a < n - 1)
             {
                 // Reset position to beginning of scanline

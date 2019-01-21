@@ -42,7 +42,7 @@ it hasn't been created yet, or no file is specified in the command line.
 
 ## Why is the third argument to `fread` always `1` in our code?
 
-It reads the hash.
+It reads the hash code of the RGB value.
 
 ## What value does line 65 of `copy.c` assign to `padding` if `bi.biWidth` is `3`?
 
@@ -50,11 +50,11 @@ It reads the hash.
 
 ## What does `fseek` do?
 
-TODO
+fseek is used as a cursor to track the position in the file.
 
 ## What is `SEEK_CUR`?
 
-TODO
+SEEK_CUR is the current position in the file.
 
 ## Whodunit?
 
