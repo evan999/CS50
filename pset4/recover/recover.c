@@ -19,16 +19,15 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    // Open memory card raw data file with read permission
+    FILE *raw_file = fopen(argv[1], "r");
+
     // Unable to open file
     if (raw_file == NULL)
     {
         fprintf(stderr, "Could not open %s.\n", argv[1]);
         return 2;
     }
-
-
-    // Open memory card raw data file with read permission
-    FILE *raw_file = fopen(argv[1], "r");
 
     unsigned char buffer[512]; //save 512 bytes at a time per block into a buffer array
 
@@ -39,8 +38,8 @@ int main(int argc, char *argv[])
 
     int jpeg_counter = 0; // counter variable for JPEGs found in file.
 
-    // If JPEG found, set to true
-    bool jpeg_found = false;
+    // If JPEG found, set to 1
+    int jpeg_found = 0;
 
     // Read into memory card file
     while(fread(buffer, sizeof buffer, 1, raw_file) == 1)
@@ -53,14 +52,29 @@ int main(int argc, char *argv[])
             buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
         {
             //If not first JPEG
-            if (jpeg_found == true)
-            {
+
                 // found start of new JPEG, close current JPEG
-                fclose(img);
+                //fclose(img);
                 // create new JPEG
-                sprintf(filename, "%03i.jpg", jpeg_counter);
-                img = fopen(filename, "w");
-                jpeg_counter++;
+            //fclose(img);
+            if (jpeg_found == 1)
+            {
+                // first JPEG found
+                fclose(img);
+                //img = NULL;
+                //fwrite(&buffer, 512, 1, img);
+
+                //jpeg_found = true;
+            }
+            else
+            {
+                jpeg_found = 1;
+            }
+
+            sprintf(filename, "%03i.jpg", jpeg_counter);
+            img = fopen(filename, "w");
+            jpeg_counter++;
+            //fwrite(&buffer, 1, 512, img);
                 // close JPEG and open new one once new JPEG is found
 
 
@@ -77,84 +91,28 @@ int main(int argc, char *argv[])
                 // is found
                 //fwrite(data, size, number, outptr);
                 // read 512 blocks
-            }
-            else
-            {
-                // first JPEG found
-                jpeg_found = true;
-            }
+            //}
+
 
         }
-        if (jpeg_found == true)
+
+        if (jpeg_found == 1)
         {
-            // not a JPEG
-            // Skip ahead 508 bytes to next block
-            // fread(buffer, 512, 1, raw_file);
-            fwrite(&buffer, sizeof buffer, 1, img);
-
+            fwrite(&buffer, 512, 1, img);
         }
+
+        // if (jpeg_found == true)
+        // {
+        //     // not a JPEG
+        //     // Skip ahead 508 bytes to next block
+        //     // fread(buffer, 512, 1, raw_file);
+        //     fwrite(&buffer, sizeof buffer, 1, img);
+
+        // }
     }
+    printf("Total jpegs found: %i\n", jpeg_counter);
+    fclose(raw_file);
+    fclose(img);
 
+    return 0;
 }
-
-    // Write 512 bytes at a time until new JPEG is found
-
-//     fwrite(data, size, number, outptr);
-
-//     // Write condition that indicates when 512 bytes have
-//     // been successfully read and condition for when EOF is reached.
-
-//     fclose(raw_file);
-
-//     fclose(img);
-
-//     free(buffer);
-
-// }
-
-// // Pseudocode
-
-// // Open card file
-// // Repeat until end of card
-// //  read 512 bytes into a buffer
-// //  start of a new JPEG?
-
-// //  already found a JPEG?
-
-// // Close any remaining files
-
-// // While not end of card file
-// //    Read
-
-// // Check if first 4 bytes of a block indicate a
-//     // JPEG header. If not, skip to next block.
-//     // Repeat until the first 512th block of a JPEG
-//     // is found. This indicates our first JPEG.
-//     // All blocks side-to-side from here on will contain JPEGs
-//     // When new JPEG is reached, the current JPEG has ended.
-//     // Close that then start the new JPEG.
-//     // Repeat until EOF is reached.
-
-
-
-//     //fread(buffer, 1, 512, raw_file);
-
-//     // or
-
-//     // fread(buffer, 512, 1, raw_file);
-
-//     // Check header of first 4 bytes of block
-//     // to indicate whether JPEG or not
-
-//     // Making a new JPEG
-
-//     // Filenames: ###.jpg
-//     // Named in order the files are found,
-//     // starting at 000.
-
-//     sprintf("card.raw", "%03i.jpg", 2);
-//     // filename: char array to store resultant string
-//     // ie 002.jpg
-
-//     // Open new file with writing permissions
-//     FILE *img = fopen(filename, "w");
