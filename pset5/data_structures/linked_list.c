@@ -39,7 +39,7 @@ int main(void)
     // //third->data = 13;
     // //third->next = NULL;
     // head->next->next->next = NULL;
-    push(11, head);
+    push(3, head);
     printf("Pop: %i\n", pop(head));
     printf("Last element in list: %i\n", peek(head));
 
@@ -77,14 +77,20 @@ int pop(struct Node* head)
     // Find second to last node
     while (trav->next->next != NULL)
     {
-        //printf("%i\n");
         trav = trav->next;
     }
+
+    // if (trav->next != NULL)
+    // {
+    //     free(trav);
+    // }
 
     int data = trav->next->data; // Hey next, what's your data?
     free(trav->next); // Hey next, you're free!
     trav->next = NULL;
+    free(trav);
     return data; // return number
+
 }
 
 // Look at the last item
@@ -96,6 +102,15 @@ int peek(struct Node* head)
     {
         trav = trav->next;
     }
+
+    // if (trav->next != NULL)
+    // {
+    //     data = trav->data;
+    // }
+    // else
+    // {
+    //     data = trav->next->data;
+    // }
 
     int data = trav->next->data;
     return data;
@@ -123,18 +138,6 @@ void free_list(struct Node* root)
         // Function is done. Go back to start of function.
         return;
     }
-
-    // if (trav->next == NULL)
-    // {
-    //     free(trav);
-    //     trav = NULL;
-    // }
-
-    // If at end of list
-    // if (trav->next == NULL)
-    // {
-    //     free(trav);
-    // }
 
     // Continue down the list
     // Call function, go to next item in list and go through function
