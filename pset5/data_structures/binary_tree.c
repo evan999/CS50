@@ -1,48 +1,83 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <cs50.h>
+#include <assert.h>
 
-typedef struct Node
+typedef struct ListNode
 {
     int data;
-    struct Node *next;
+    struct ListNode *next;
+} ListNode;
+
+typedef struct BinaryNode
+{
+    int data;
+    struct BinaryNode *small;
+    struct BinaryNode *large;
+} BinaryNode;
+
+void add(int data);
+int seek(int data); // true 1 or false 0 if item exists in tree
+
+void test_tree()
+{
+    add(5);
+    assert(seek(5) == 1 && "tree contains the number 5"); // modify the true to use seek
+
+    add(3);
+    add(4);
+    assert(seek(9) == 0 && "tree does not contain 9");
+    // assert(true); // modify the true to use seek
 }
-Node;
 
-void push(int data, struct Node*);
-
-int pop(struct Node*);
-
-int peek(struct Node*);
+// Initialize root node to NULL
+//BinaryNode* root = NULL;
 
 int main(void)
 {
-    struct Node* head = NULL; // pointer to head node
-    struct Node* second = NULL; // pointer to second node
-    struct Node* third = NULL; // pointer to third node
+    printf("Hello\n");
 
-    head = (struct Node*)malloc(sizeof(struct Node)); // dynamically allocate memory to head ptr
-    second = (struct Node*)malloc(sizeof(struct Node));
-    third = (struct Node*)malloc(sizeof(struct Node));
+    // int data[] = {5, 8, 2, 9, 4, 1, 3};
+    test_tree();
 
 
+    //root = (struct BinaryNode*)malloc(sizeof(struct BinaryNode));
 
-    return 0;
+    // Initialize left and right child nodes to NULL
+    // BinaryNode->left = NULL;
+    // BinaryNode->right = NULL;
+
+
 }
 
-void push(int data, struct Node* head) // add node to linked list
+void add(int data)
 {
+    Binary* newNode = malloc(sizeof(BinaryNode));
+    newNode->data = data;
+    newNode->small = NULL;
+    newNode->large = NULL;
 
+    if (root == NULL)
+    {
+        root = newNode;
+        return;
+    }
+
+    while(true)
+    {
+        return;
+    }
+
+    do
+    {
+
+    }
+    while
+
+    return;
 }
 
-// Pop the second to last item of the linked list (last is NULL)
-int pop(struct Node* head)
-{
-    return 0;
-}
-
-// Look at the last item
-int peek(struct Node* head)
+int seek(int data)
 {
     return 0;
 }
