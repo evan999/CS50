@@ -37,11 +37,12 @@ int main(void)
 {
     printf("Hello\n");
 
-    // int data[] = {5, 8, 2, 9, 4, 1, 3};
+    int data[] = {5, 8, 2, 9, 4, 1, 3};
+    // struct BinaryNode *root = add(5);
     test_tree();
 
 
-    //root = (struct BinaryNode*)malloc(sizeof(struct BinaryNode));
+
 
     // Initialize left and right child nodes to NULL
     // BinaryNode->left = NULL;
@@ -52,27 +53,46 @@ int main(void)
 
 void add(int data)
 {
-    Binary* newNode = malloc(sizeof(BinaryNode));
+    BinaryNode* newNode = malloc(sizeof(BinaryNode));
     newNode->data = data;
     newNode->small = NULL;
     newNode->large = NULL;
 
+    // If empty tree
     if (root == NULL)
     {
         root = newNode;
         return;
     }
 
-    while(true)
+    while (newNode->small == NULL && newNode->large == NULL)
     {
-        return;
+        if (data < root->data && newNode->small == NULL)
+        {
+            newNode->small->data = data;
+            return;
+        }
+        else if (data > root->data && newNode->large == NULL)
+        {
+            newNode->large->data = data;
+            return;
+        }
+        else
+        {
+            continue;
+        }
     }
 
-    do
-    {
+    // while(true)
+    // {
+    //     return;
+    // }
 
-    }
-    while
+    // do
+    // {
+
+    // }
+    // while
 
     return;
 }
