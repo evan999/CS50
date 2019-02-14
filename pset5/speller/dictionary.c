@@ -51,6 +51,42 @@ bool load(const char *dictionary)
     while (fscanf(file, "%s", word) != EOF)
     {
         // TODO
+        /*
+        if node is NULL, set is_word to false
+        break out of loop. We have reached the last letter and it is not the word.
+        */
+        struct node* curNode = root;
+        // Check for word
+        for (int letter = 0; letter < N; letter++)
+        {
+            if (children[letter] == NULL)
+            {
+                node* newNode = malloc(sizeof(node));
+                children[letter]->newNode;
+            }
+            else
+            {
+                // Node already created. Place letter in this node and continue
+                children[letter]->newNode;
+            }
+
+            if (root == NULL)
+            {
+                root->is_word = false;
+                return;
+            }
+
+            if (curNode->children[letter] == NULL)
+            {
+                node->is_word = false;
+                return;
+            }
+        }
+
+        newNode->is_word = true;
+        // continue to next word in dictionary
+        return;
+
     }
 
     // Close dictionary
