@@ -19,16 +19,16 @@ typedef struct BinaryNode
 void add(int data);
 int seek(int data); // true 1 or false 0 if item exists in tree
 
-void test_tree()
-{
-    add(5);
-    assert(seek(5) == 1 && "tree contains the number 5"); // modify the true to use seek
+// void test_tree()
+// {
+//     add(5);
+//     assert(seek(5) == 1 && "tree contains the number 5"); // modify the true to use seek
 
-    add(3);
-    add(4);
-    assert(seek(9) == 0 && "tree does not contain 9");
-    // assert(true); // modify the true to use seek
-}
+//     add(3);
+//     add(4);
+//     assert(seek(9) == 0 && "tree does not contain 9");
+//     // assert(true); // modify the true to use seek
+// }
 
 // Initialize root node to NULL
 //BinaryNode* root = NULL;
@@ -36,10 +36,15 @@ void test_tree()
 int main(void)
 {
     printf("Hello\n");
+    // add(5);
+    // add(5);
+    printf("%i\n", add(5));
 
-    int data[] = {5, 8, 2, 9, 4, 1, 3};
+//    printf("Add element: %i\n", add(5));
+
+    // int data[] = {5, 8, 2, 9, 4, 1, 3};
     // struct BinaryNode *root = add(5);
-    test_tree();
+    // test_tree();
 
 
 
@@ -53,6 +58,10 @@ int main(void)
 
 void add(int data)
 {
+    // BinaryNode* root = malloc(sizeof(BinaryNode));
+    struct BinaryNode* root = NULL;
+    root = malloc(sizeof(BinaryNode));
+
     BinaryNode* newNode = malloc(sizeof(BinaryNode));
     newNode->data = data;
     newNode->small = NULL;
@@ -67,12 +76,12 @@ void add(int data)
 
     while (newNode->small == NULL && newNode->large == NULL)
     {
-        if (data < root->data && newNode->small == NULL)
+        if (data < root->data && newNode->small != NULL)
         {
             newNode->small->data = data;
             return;
         }
-        else if (data > root->data && newNode->large == NULL)
+        else if (data > root->data && newNode->large != NULL)
         {
             newNode->large->data = data;
             return;
@@ -83,20 +92,10 @@ void add(int data)
         }
     }
 
-    // while(true)
-    // {
-    //     return;
-    // }
-
-    // do
-    // {
-
-    // }
-    // while
-
     return;
 }
 
+// Find element in the tree
 int seek(int data)
 {
     return 0;
