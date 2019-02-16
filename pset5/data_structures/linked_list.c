@@ -120,28 +120,28 @@ int pop(struct Node* head)
 
 }
 
-// Look at the last item
-// int peek(struct Node* head)
-// {
-//     Node* trav = head;
+Look at the last item
+int peek(struct Node* head)
+{
+    Node* trav = head;
 
-//     while(trav->next->next != NULL)
-//     {
-//         trav = trav->next;
-//     }
+    while(trav->next->next != NULL)
+    {
+        trav = trav->next;
+    }
 
-//     // if (trav->next != NULL)
-//     // {
-//     //     data = trav->data;
-//     // }
-//     // else
-//     // {
-//     //     data = trav->next->data;
-//     // }
+    // if (trav->next != NULL)
+    // {
+    //     data = trav->data;
+    // }
+    // else
+    // {
+    //     data = trav->next->data;
+    // }
 
-//     int data = trav->next->data;
-//     return data;
-// }
+    int data = trav->next->data;
+    return data;
+}
 
 void free_list(struct Node* root)
 {
@@ -178,7 +178,19 @@ void free_list(struct Node* root)
     return;
 }
 
+void free_list_new(Node* trav)
+{
+    if (trav->next == NULL)
+    {
+        free(trav);
+        return;
+    }
 
+    free_list_new(trav->next);
+    free(trav);
+
+
+}
 
 
 

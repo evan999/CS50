@@ -20,13 +20,12 @@ BinaryNode* root = NULL;
 
 void add(int item);
 int seek(int query); // true 1 or false 0 if item exists in tree
-
+void free_tree();
 
 void test_tree()
 {
     add(5);
     assert(seek(5) == 1 && "tree contains the number 5"); // modify the true to use seek
-
     add(3);
     add(4);
     assert(seek(9) == 0 && "tree does not contain 9");
@@ -67,10 +66,25 @@ void testSeek()
     assert(!seek(7) && "confirm 7 does not exist right left");
 }
 
+// Test our Add function by using assert on seek.
 void testAdd()
 {
+    add(5);
+    assert(seek(5) && "found the added 5");
     add(2);
-    assert(seek(2) && "found 2");
+    assert(seek(2) && "found the new number 2");
+    assert(seek(5) && "5 still exits");
+    add(1);
+    assert(seek(1) && "1 was added successfully");
+    assert(seek(2) && "2 still exists");
+    add(3);
+    assert(seek(3) && "3 was found");
+    add(8);
+    assert(seek(8) ** "8 was found");
+    add(9);
+    add(3);
+    assert(seek(9) && seek(3) && "9 and 3 were both found");
+    assert(seek(8) && "8 still exists");
 }
 
 // Initialize root node to NULL
@@ -109,10 +123,6 @@ void add(int item)
     // if item is smaller, then current node move to left (small) route
     // check for end of the branch
 
-    // BinaryNode* root = malloc(sizeof(BinaryNode));
-    // struct BinaryNode* root = NULL;
-    root = malloc(sizeof(BinaryNode));
-
     BinaryNode* newNode = malloc(sizeof(BinaryNode));
     newNode->data = item;
     newNode->small = NULL;
@@ -129,47 +139,34 @@ void add(int item)
 
     while("end of branch not found")
     {
-        // if item is smaller, go right
-        if (nav->data > item)
+        // if item is smaller, go left
+        // Look before you leap!
+        if (item < nav->data)
         {
-            if (nav->small == NULL)
+            if (nav->small != NULL)
             {
                 nav = nav->small;
+                continue;
             }
+
+            nav->small = newNode;
+            return;
         }
 
-        // if (nav->data > item)
-        // {
-        //     newNode = nav->small;
-        // }
+        if (item > nav->data)
+        {
+            if (nav->large != NULL)
+            {
+                nav = nav->large;
+                continue;
+            }
+
+            nav->large = newNode;
+            return;
+        }
 
         return;
     }
-
-    // if (nav->large == NULL)
-    // {
-    //     return;
-    // }
-
-    // while (newNode->small == NULL && newNode->large == NULL)
-    // {
-    //     if (item < root->data && newNode->small != NULL)
-    //     {
-    //         newNode->small->item = item;
-    //         return;
-    //     }
-    //     else if (data > root->data && newNode->large != NULL)
-    //     {
-    //         newNode->large->data = data;
-    //         return;
-    //     }
-    //     else
-    //     {
-    //         continue;
-    //     }
-    // }
-
-    // return;
 }
 
 // Find element in the tree
@@ -180,7 +177,7 @@ int seek(int query)
     // It will return 1 if the number is found in the tree.
 
     BinaryNode* nav = root;
-    while (true && "Not at the end of a branch or haven't found the data yet")
+    while (true && "Not at the end of a branch or haven't found the query yet")
     {
         // how to find
         // check current node's data
@@ -193,7 +190,7 @@ int seek(int query)
 
         // else
         // is current node larger or smaller then query
-        if (nav->data > query)
+        if (query < nav->data)
         {
             // go smaller route
             // check for a node
@@ -221,6 +218,13 @@ int seek(int query)
     }
 
     return 0;
+}
+
+void free_tree()
+{
+    // Free all heap nodes from the tree
+
+
 }
 
 
