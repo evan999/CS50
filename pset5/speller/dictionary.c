@@ -53,21 +53,22 @@ bool load(const char *dictionary)
         // TODO
         /*
         if node is NULL, set is_word to false
-        break out of loop. We have reached the last letter and it is not the word.
+        break out of loop. We have reached the last letter and it is not a valid word.
         */
-        struct node* curNode = root;
+        struct node* nav = root;
         // Check for word
         for (int letter = 0; letter < N; letter++)
         {
-            if (children[letter] == NULL)
+            if (children[letter]->data == NULL)
             {
-                node* newNode = malloc(sizeof(node));
+                newNode = malloc(sizeof(node));
                 children[letter]->newNode;
             }
             else
             {
                 // Node already created. Place letter in this node and continue
-                children[letter]->newNode;
+                nav->newNode;
+                continue;
             }
 
             if (root == NULL)
@@ -76,7 +77,7 @@ bool load(const char *dictionary)
                 return;
             }
 
-            if (curNode->children[letter] == NULL)
+            if (nav->children[letter] == NULL)
             {
                 node->is_word = false;
                 return;
