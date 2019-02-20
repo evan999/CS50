@@ -20,12 +20,15 @@ node;
 // Represents a trie
 // Root of a trie
 node *root;
+node *children[N];
 
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
 {
     // Initialize trie
     root = malloc(sizeof(node));
+
+    // If empty trie
     if (root == NULL)
     {
         return false;
@@ -55,39 +58,33 @@ bool load(const char *dictionary)
         if node is NULL, set is_word to false
         break out of loop. We have reached the last letter and it is not a valid word.
         */
-        struct node* nav = root;
+        // struct node* nav = root;
         // Check for word
-        for (int letter = 0; letter < N; letter++)
+        node* nav = root;
+
+        // root->children[i] = newNode; // ???
+
+        for (int i = 0; i < N; i++)
         {
-            if (children[letter]->data == NULL)
+            if (nav->children[i] == NULL)
             {
-                newNode = malloc(sizeof(node));
-                children[letter]->newNode;
+                // Create new node for character
+                nav->children[i] = malloc(sizeof(node));
+                // newNode = children[i]->newNode;
+                nav = nav->children[i];
             }
             else
             {
-                // Node already created. Place letter in this node and continue
-                nav->newNode;
+                // Node already created. Move to node and continue down the word (array)
+                nav = nav->children[i];
                 continue;
-            }
-
-            if (root == NULL)
-            {
-                root->is_word = false;
-                return;
-            }
-
-            if (nav->children[letter] == NULL)
-            {
-                node->is_word = false;
-                return;
             }
         }
 
-        newNode->is_word = true;
+        nav->is_word = true;
         // continue to next word in dictionary
-        return;
-
+        // return;
+        return true;
     }
 
     // Close dictionary
