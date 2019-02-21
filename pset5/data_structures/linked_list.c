@@ -52,18 +52,21 @@ int main(void)
     push(14, head);
     printf("Pop 2: %i\n", pop(head));
     printf("%i\n", pop(head));
+    printf("Peek: %i\n", peek(head));
     free_list(head);
     // printf("Last element in list: %i\n", peek(head));
 
     return 0;
 }
 
-void push(int data, Node* head) // add node to linked list
+// Add node to linked list
+void push(int data, Node* head)
 {
     Node* trav = head;
 
-    while (trav != NULL && trav->next != NULL )
+    while (trav != NULL && trav->next != NULL)
     {
+        // Move ptr to next node
         trav = trav->next;
     }
     // trav->next = (struct Node*)malloc(sizeof(struct Node));
@@ -73,6 +76,7 @@ void push(int data, Node* head) // add node to linked list
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = data;
     newNode->next = NULL;
+
     if (trav == NULL)
     {
         trav = newNode;
@@ -120,10 +124,24 @@ int pop(struct Node* head)
 
 }
 
-Look at the last item
+// Look at the last item
 int peek(struct Node* head)
 {
+
     Node* trav = head;
+
+    // Empty list
+    if (trav == NULL)
+    {
+        return -1;
+    }
+
+    if (trav->next == NULL)
+    {
+        int data = trav->data;
+        return data;
+    }
+
 
     while(trav->next->next != NULL)
     {
@@ -180,15 +198,23 @@ void free_list(struct Node* root)
 
 void free_list_new(Node* trav)
 {
+    // Base cases
+    // Empty list
+    if (trav == NULL)
+    {
+        return;
+    }
+
+    // One element in list
     if (trav->next == NULL)
     {
         free(trav);
         return;
     }
 
+    // Recursive case
     free_list_new(trav->next);
     free(trav);
-
 
 }
 
