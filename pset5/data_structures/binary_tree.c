@@ -20,7 +20,7 @@ BinaryNode* root = NULL;
 
 void add(int item);
 int seek(int query); // true 1 or false 0 if item exists in tree
-void free_tree();
+void free_tree(BinaryNode* nav);
 
 void test_tree()
 {
@@ -87,6 +87,22 @@ void testAdd()
     assert(seek(8) && "8 still exists");
 }
 
+void testFree()
+{
+    add(5);
+    assert(seek(5) && "5 was added to the tree");
+    add(2);
+    add(1);
+    add(8);
+    add(3);
+    add(9);
+    free_tree(root);
+    assert(!seek(5) && "5 was cleared from the tree");
+    assert(!seek(2) && "2 was cleared from the tree");
+    assert(!seek(8) && "8 was cleared from the tree");
+    assert(!seek(1) && "1 was cleared");
+}
+
 // Initialize root node to NULL
 //BinaryNode* root = NULL;
 
@@ -100,9 +116,10 @@ int main(void)
 //    printf("Add element: %i\n", add(5));
 
     int data[] = {5, 8, 2, 9, 4, 1, 3};
+    testFree();
     // bruteForceTree();
     // testSeek();
-    testAdd();
+    // testAdd();
     // struct BinaryNode *root = add(5);
     // test_tree();
 
@@ -220,13 +237,39 @@ int seek(int query)
     return 0;
 }
 
-void free_tree()
+void free_tree(BinaryNode* nav)
 {
     // Free all heap nodes from the tree
 
+    // Base cases
+    // Empty tree
+    if (nav == NULL)
+    {
+        return;
+    }
 
+    // nav has no children
+    if (nav->small == NULL && nav->large == NULL)
+    {
+        free(nav);
+        return;
+    }
+
+
+    // Recursive cases
+    if (nav->small != NULL)
+    {
+        free_tree(nav->small);
+    }
+
+    if (nav->large != NULL)
+    {
+        free_tree(nav->large);
+    }
+    free(nav);
+
+    return;
 }
-
 
 
 
