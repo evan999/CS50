@@ -17,6 +17,23 @@
 // Prototype
 double calculate(const struct rusage *b, const struct rusage *a);
 
+// Function tests
+void test_load();
+void test_check();
+
+
+// void test_load
+// {
+//     // Test functionality of load
+//     // Make sure all the words in the dict are loaded into the trie
+// }
+
+// int test_check()
+// {
+//     // Test functionality of check
+//     //
+// }
+
 int main(int argc, char *argv[])
 {
     // Check for correct number of args
