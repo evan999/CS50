@@ -28,6 +28,10 @@ node;
 node *root;
 // node *children[N];
 
+int get_index(const char c);
+
+void free_nodes(node* nav);
+
 // Counter for number of valid words in dictionary stored in trie
 unsigned int num_words = 0;
 
@@ -93,7 +97,6 @@ bool load(const char *dictionary)
 
     for (int c = fgetc(file); c != EOF; c = fgetc(file))
     {
-        // TODO
 
         // While there are words in the dictionary
         //    for each word in dictionary, read each character
@@ -159,7 +162,6 @@ unsigned int size(void)
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
-    // TODO
     // case-insensitive
     // Assumes strings with only alphabetical chars
     // and/or apostrophes
@@ -174,13 +176,6 @@ bool check(const char *word)
 
     for(int i = 0; word[i] != '\0'; i++)
     {
-    // // for(int i = 0, word_len = strlen(word); i < word_len; i++)
-    // // {
-    // //     if (word[i] == NULL)
-    // //     {
-    // //         // word is mispelled; not a valid word
-    // //         return false;
-    // //     }
         int index = get_index(word[i]);
 
         if(nav->children[index] == NULL)
@@ -188,24 +183,9 @@ bool check(const char *word)
             return false;
         }
 
-
         nav = nav->children[index];
-
-    // // if (nav->children[i] == NULL)
-    // // {
-    // //     return false;
-    // // }
-    // // else
-    // // {
-    // //     nav = nav->children[i];
-    // // }
-
-    // // if (!is_word)
-    // // {
-    // //     return false;
-    // // }
-
     }
+
     return nav->is_word;
     // return false;
 }
@@ -214,7 +194,21 @@ bool check(const char *word)
 bool unload(void)
 {
     // TODO
-    return false;
+    free_nodes(nav);
+    return true;
 }
 
+// Helper function to recursively free nodes from trie.
+void free_nodes(node* nav)
+{
+    for (int i = 0; i < N; i++)
+    {
+        if (nav->children[i] == NULL)
+        {
+            free_nodes(nav->children[i]);
+        }
+    }
+
+    free(nav);
+}
 
