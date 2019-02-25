@@ -28,6 +28,7 @@ node;
 node *root;
 // node *children[N];
 
+
 int get_index(const char c);
 
 void free_nodes(node* nav);
@@ -194,7 +195,7 @@ bool check(const char *word)
 bool unload(void)
 {
     // TODO
-    free_nodes(nav);
+    free_nodes(root);
     return true;
 }
 
@@ -203,7 +204,7 @@ void free_nodes(node* nav)
 {
     for (int i = 0; i < N; i++)
     {
-        if (nav->children[i] == NULL)
+        if (nav->children[i] != NULL)
         {
             free_nodes(nav->children[i]);
         }
