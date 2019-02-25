@@ -50,21 +50,22 @@ int get_index(const char c)
     {
         return 26;
     }
-
 }
 
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
 {
     // Initialize trie
-    root = malloc(sizeof(node));
-
-    // If empty trie
-    if (root == NULL)
-    {
-        return false;
-    }
+    // root = malloc(sizeof(node));
+    root = calloc(1, sizeof(node));
+    // // If empty trie
+    // if (root == NULL)
+    // {
+    //     return false;
+    // }
     // root->is_word = false;
+    // Initialize all nodes to NULL
+    // memset(root, 0, sizeof(node));
     // for (int i = 0; i < N; i++)
     // {
     //     root->children[i] = NULL;
@@ -124,7 +125,8 @@ bool load(const char *dictionary)
             {
                 // Create new node for character
                 // printf("%i\n", index);
-                nav->children[index] = malloc(sizeof(node));
+                // nav->children[index] = malloc(sizeof(node));
+                nav->children[index] = calloc(1, sizeof(node));
             // newNode = children[i]->newNode;
             // nav = nav->children[index];
             // continue;
@@ -170,15 +172,15 @@ bool check(const char *word)
 
     node* nav = root;
 
-    for(int i = 0; word != '\0'; i++)
+    for(int i = 0; word[i] != '\0'; i++)
     {
-    // for(int i = 0, word_len = strlen(word); i < word_len; i++)
-    // {
-    //     if (word[i] == NULL)
-    //     {
-    //         // word is mispelled; not a valid word
-    //         return false;
-    //     }
+    // // for(int i = 0, word_len = strlen(word); i < word_len; i++)
+    // // {
+    // //     if (word[i] == NULL)
+    // //     {
+    // //         // word is mispelled; not a valid word
+    // //         return false;
+    // //     }
         int index = get_index(word[i]);
 
         if(nav->children[index] == NULL)
@@ -189,31 +191,23 @@ bool check(const char *word)
 
         nav = nav->children[index];
 
+    // // if (nav->children[i] == NULL)
+    // // {
+    // //     return false;
+    // // }
+    // // else
+    // // {
+    // //     nav = nav->children[i];
+    // // }
+
+    // // if (!is_word)
+    // // {
+    // //     return false;
+    // // }
+
     }
-    //     nav = nav->word[i];
-    // }
-    //      if NULL
-    //         word is mispelled
-    //      if not NULL
-    //         move to next letter
-    //      If end of input word
-    //         check if is_word is true
-    // if (nav->children[i] == NULL)
-    // {
-    //     return false;
-    // }
-    // else
-    // {
-    //     nav = nav->children[i];
-    // }
-
-    // if (!is_word)
-    // {
-    //     return false;
-    // }
-
-
     return nav->is_word;
+    // return false;
 }
 
 // Unloads dictionary from memory, returning true if successful else false
