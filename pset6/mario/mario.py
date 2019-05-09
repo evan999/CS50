@@ -1,17 +1,11 @@
-import cs50
+from cs50 import get_int
 
 
-pyramid_height = input("Enter the height of the pyramid: ")
+while True:
+    pyramid_height = get_int("Enter the height of the pyramid: ")
+    if (pyramid_height >= 1) and (pyramid_height <= 8):
+        break
 
-def get_pyramid_height():
+#for level in range(pyramid_height):
 
-    while True:
-        try:
-         pyramid_height = input("Enter the height of the pyramid: ")
-        except ValueError:
-            continue
-        else:
-            return pyramid_height
-            break
-#for pyramid_level in range(pyramid_height):
 
