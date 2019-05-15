@@ -6,6 +6,13 @@ while True:
     if (pyramid_height >= 1) and (pyramid_height <= 8):
         break
 
-#for level in range(pyramid_height):
+for level in range(pyramid_height):
+    spaces = pyramid_height - level - 1
+    print(" " * spaces, end="")
+    hashes = level + 1
+    print("#" * hashes)
+
+
+
 
 
